@@ -1,9 +1,8 @@
 package tests;
 
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import services.UserService;
 
 
@@ -16,7 +15,7 @@ public class ApiMicroservicios {
 
         String email = getResponse.jsonPath().getString("data.email");
         System.out.println("email valido: " + email);
-        assertTrue(email.contains("@"), "El email no contiene el caracter '@'");
+        Assert.assertTrue(email.contains("@"), "El email no contiene el caracter '@'");
     }
     @Test
     public void testPostUsers(){
