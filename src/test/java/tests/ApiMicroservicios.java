@@ -8,6 +8,10 @@ import services.UserService;
 
 
 public class ApiMicroservicios {
+
+    int idGuestCreado;
+
+    //Test que valida metodo GET
     @Test
     public void testGetUsers(){
         UserService userApi = new UserService();
@@ -18,25 +22,29 @@ public class ApiMicroservicios {
         System.out.println("email valido: " + email);
         Assert.assertTrue(email.contains("@"), "El email no contiene el caracter '@'\n\n");
     }
+    //Test que valida metodo Post
     @Test
     public void testPostUsers(){
         UserService userApi = new UserService();
         System.out.println("\n\nMetodo POST\n\n");
         Response getResponse = userApi.PostUsers();
+        idGuestCreado  = getResponse.jsonPath().getInt("id");
         System.out.println("\n\n");
     }
+    //Test que valida metodo PUT
     @Test
     public void testPutUser(){
         UserService userApi = new UserService();
         System.out.println("\n\nMetodo PUT\n\n");
-        Response getResponse = userApi.PutUsers(2);
+        userApi.PutUsers(idGuestCreado);
         System.out.println("\n\n");
     }
+    //Test que valida metodo DELETE
     @Test
     public void testDeleteUser(){
         UserService userApi = new UserService();
         System.out.println("\n\nMetodo DELETE\n\n");
-        Response getResponse = userApi.DeleteUsers(2);
+        userApi.DeleteUsers(idGuestCreado);
         System.out.println("\n\n");
     }
 }

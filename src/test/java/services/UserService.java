@@ -11,6 +11,7 @@ import config.ConfigManager;
 
 public class UserService {
 
+    //Metodo GET para obtener usuario por id
     public Response GetUser(int id){
         ConfigManager config = new ConfigManager();
 
@@ -28,6 +29,7 @@ public class UserService {
                 .extract()
                 .response();
     }
+    //Metodo POST para crear un usuario
     public Response PostUsers(){
         ConfigManager config = new ConfigManager();
         UserGenerator utils = new UserGenerator();
@@ -53,7 +55,8 @@ public class UserService {
                 .extract()
                 .response();
     }
-    public Response PutUsers(int id){
+    //Metodo PUT para actualizar usuario por id
+    public void PutUsers(int id){
         ConfigManager config = new ConfigManager();
         UserGenerator utils = new UserGenerator();
         String name = utils.fakeName();
@@ -61,7 +64,7 @@ public class UserService {
         String requestBody = "{ \"name\": \""+name+"\",\"job\": \""+rol+"\" }";
         RestAssured.baseURI = config.getBase_uri();
 
-        return RestAssured
+         RestAssured
                 .given()
                 .header(config.getHeader_Content_Type(), config.getHeader_Content_Type_application_json())
                 .header(config.getHeader_x_api_key(),config.getHeader_x_api_key_value())
@@ -77,11 +80,12 @@ public class UserService {
                 .extract()
                 .response();
     }
-    public Response DeleteUsers(int id){
+    //Metodo DELETE para eliminar usuario por id
+    public void DeleteUsers(int id){
         ConfigManager config = new ConfigManager();
         RestAssured.baseURI = config.getBase_uri();
 
-        return RestAssured
+         RestAssured
                 .given()
                 .header(config.getHeader_x_api_key(),config.getHeader_x_api_key_value())
                 .when()
